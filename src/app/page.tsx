@@ -3,7 +3,7 @@ import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 
 async function getFeaturedProducts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/products?featured=true`, {
+  const res = await fetch("/api/products?featured=true", {
     cache: "no-store",
   });
   if (!res.ok) return [];
