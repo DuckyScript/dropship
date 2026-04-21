@@ -8,35 +8,51 @@ Advanced administrative tools for managing the Dropship store.
 - `/tasks`: Automated background tasks and maintenance.
 - `/utils`: Common utilities and database connection.
 
-## Installation
+## Usage
+
+### Local CLI (Development)
 
 Ensure you have run `npm install` and your environment variables are configured in `.env`.
 
-## Usage
-
-### Sales Reporting
-Generates an advanced sales report with revenue breakdown.
+#### Sales Reporting
 ```bash
 node backend/scripts/salesReport.js
 ```
 
-### Inventory Management
-#### Manual Update
-Update stock for a specific SKU.
+#### Inventory Management
 ```bash
 node backend/scripts/updateInventory.js <SKU> <QUANTITY>
-```
-
-#### Supplier Sync
-Simulate an inventory sync with a dropshipping supplier.
-```bash
 node backend/tasks/syncSupplier.js
 ```
 
-### Database Maintenance
-Clean up old or stale orders.
+#### Database Maintenance
 ```bash
 node backend/tasks/maintenance.js
+```
+
+### Vercel / API (Production)
+
+The backend logic is also exposed via Next.js API routes for Vercel compatibility and remote management.
+
+- **Sales Report**: `GET /api/admin/report`
+- **Inventory Sync**: `POST /api/admin/inventory/sync`
+- **Maintenance**: `POST /api/admin/maintenance`
+
+You can trigger these using tools like `curl` or by configuring **Vercel Cron Jobs** in your `vercel.json`:
+
+```json
+{
+  "crons": [
+    {
+      "path": "/api/admin/inventory/sync",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/admin/maintenance",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
 ```
 
 ## Advanced Features
