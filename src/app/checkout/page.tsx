@@ -36,12 +36,39 @@ export default function CheckoutPage() {
     e.preventDefault();
     setIsProcessing(true);
 
-    // Simulate order
-    await new Promise((r) => setTimeout(r, 1500));
+    try {
+      // 1. Create the order in the database
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerName: info.name,
+          customerEmail: info.email,
+          address: `${info.address}, ${info.city}, ${info.state} ${info.zip}`,
+          items: items.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          total: totalPrice,
+        }),
+      });
 
-    setStep("done");
-    clearCart();
-    setIsProcessing(false);
+      if (!res.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      // 2. Clear cart and show success
+      setStep("done");
+      clearCart();
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Something went wrong with your order. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (items.length === 0 && step !== "done") {

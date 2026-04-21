@@ -42,7 +42,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Filters and Search */}
-        <div className="flex flex-col md:flex-row items-center gap-6 mb-12 animate-fade-in animation-delay-100">
+        <div className="flex flex-col md:flex-row items-stretch gap-6 mb-12 animate-fade-in animation-delay-100">
           <div className="relative w-full md:flex-1 group">
             <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 group-focus-within:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -52,19 +52,19 @@ export default function ProductsPage() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-14 pr-6 py-4 bg-zinc-50 border-transparent rounded-2xl focus:bg-white focus:ring-2 focus:ring-black/5 focus:border-black transition-all outline-none text-zinc-900 font-medium"
+              className="w-full pl-14 pr-6 py-4 bg-zinc-50 border-transparent rounded-2xl focus:bg-white focus:ring-2 focus:ring-black/5 focus:border-black transition-all outline-none text-zinc-900 font-medium h-full"
             />
           </div>
           
-          <div className="flex w-full md:w-auto overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar">
+          <div className="flex w-full md:w-auto overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar bg-zinc-50 p-2 rounded-[22px]">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-4 rounded-2xl text-sm font-bold whitespace-nowrap transition-all ${
+                className={`px-8 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all ${
                   selectedCategory === category 
-                  ? "bg-black text-white shadow-lg shadow-black/10 scale-105" 
-                  : "bg-zinc-50 text-zinc-500 hover:bg-zinc-100 hover:text-black"
+                  ? "bg-white text-black shadow-sm" 
+                  : "text-zinc-500 hover:text-black"
                 }`}
               >
                 {category}
