@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma, { formatCurrency, logActivity } from '../utils/db.js';
 
 async function generateReport() {
   try {
+    logActivity('REPORT_GEN', 'Generating advanced sales report...');
+
     const orders = await prisma.order.findMany({
       orderBy: { createdAt: 'desc' }
     });
@@ -13,17 +13,31 @@ async function generateReport() {
     const pendingOrders = orders.filter(o => o.status === 'pending').length;
     const shippedOrders = orders.filter(o => o.status === 'shipped').length;
 
-    console.log('=== SALES REPORT ===');
-    console.log(`Total Orders: ${orderCount}`);
-    console.log(`Total Revenue: $${totalRevenue.toFixed(2)}`);
-    console.log(`Average Order Value: $${(orderCount > 0 ? totalRevenue / orderCount : 0).toFixed(2)}`);
-    console.log('--------------------');
-    console.log(`Pending: ${pendingOrders}`);
-    console.log(`Shipped: ${shippedOrders}`);
-    console.log('====================');
+    // Advanced Stats: Revenue by Month
+    const revenueByMonth = orders.reduce((acc, order) => {
+      const month = order.createdAt.toISOString().substring(0, 7); // YYYY-MM
+      acc[month] = (acc[month] || 0) + order.total;
+      return acc;
+    }, {});
+
+    console.log('\n========================================');
+    console.log('         ADVANCED SALES REPORT          ');
+    console.log('========================================');
+    console.log(`Total Orders:         ${orderCount}`);
+    console.log(`Total Revenue:        ${formatCurrency(totalRevenue)}`);
+    console.log(`Average Order Value:  ${formatCurrency(orderCount > 0 ? totalRevenue / orderCount : 0)}`);
+    console.log('----------------------------------------');
+    console.log(`Pending Orders:       ${pendingOrders}`);
+    console.log(`Shipped Orders:       ${shippedOrders}`);
+    console.log('----------------------------------------');
+    console.log('Monthly Revenue Breakdown:');
+    Object.entries(revenueByMonth).sort().forEach(([month, rev]) => {
+      console.log(`  ${month}:            ${formatCurrency(rev)}`);
+    });
+    console.log('========================================\n');
 
   } catch (error) {
-    console.error('[ERROR] Failed to generate report', error);
+    logActivity('ERROR', `Failed to generate report: ${error.message}`);
   } finally {
     await prisma.$disconnect();
   }

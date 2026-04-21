@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma, { logActivity } from '../utils/db.js';
 
 async function updateStock(sku, quantity) {
   try {
@@ -10,17 +8,17 @@ async function updateStock(sku, quantity) {
         stock: {
           increment: quantity
         },
-        inStock: true // Assuming adding stock makes it in stock
+        inStock: true 
       }
     });
     
     if (product.count > 0) {
-      console.log(`[SUCCESS] Updated stock for SKU: ${sku}. Added: ${quantity}`);
+      logActivity('STOCK_UPDATE', `Updated SKU: ${sku}. Added: ${quantity}`);
     } else {
-      console.log(`[WARNING] No product found with SKU: ${sku}`);
+      logActivity('WARNING', `No product found with SKU: ${sku}`);
     }
   } catch (error) {
-    console.error(`[ERROR] Failed to update stock for SKU: ${sku}`, error);
+    logActivity('ERROR', `Failed to update stock for SKU: ${sku} - ${error.message}`);
   }
 }
 
