@@ -20,6 +20,35 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database Setup
+
+This project uses Prisma with PostgreSQL for production (Vercel) and SQLite for local development.
+
+### Local Development
+
+1. Create a `.env.local` file for your local environment variables.
+2. If you are using a local PostgreSQL database, set the following:
+   ```env
+   POSTGRES_PRISMA_URL="postgres://..."
+   POSTGRES_URL_NON_POOLING="postgres://..."
+   ```
+3. If you want to use SQLite for local development temporarily:
+   - Update `prisma/schema.prisma`:
+     ```prisma
+     datasource db {
+       provider = "sqlite"
+       url      = "file:./dev.db"
+     }
+     ```
+   - Then run `npx prisma db push`.
+
+### Production (Vercel)
+
+The project is pre-configured to work with Vercel PostgreSQL.
+- The `prisma/schema.prisma` uses the `postgresql` provider.
+- Vercel automatically provides `POSTGRES_PRISMA_URL` and `POSTGRES_URL_NON_POOLING`.
+- No `.env` file is required in production.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
