@@ -41,11 +41,11 @@ export default async function Home() {
               <span className="w-1 h-1 rounded-full bg-white animate-ping"></span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-zinc-900 mb-6 tracking-tight animate-fade-in-up leading-[1.1] text-balance">
-              Protection that <br />
-              <span className="text-zinc-400">Reflects Your Style.</span>
+              The Ultimate <br />
+              <span className="text-zinc-400 italic">Accessory.</span>
             </h1>
             <p className="text-xl text-zinc-500 mb-10 max-w-xl animate-fade-in-up animation-delay-100 text-balance leading-relaxed">
-              Discover our curated collection of premium phone cases designed for the modern lifestyle. Minimalist, durable, and uniquely yours.
+              Where high-fashion meets high-protection. Discover our curated series of artist collaborations and signature luxury cases.
             </p>
             <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-200">
               <Link href="/products" className="btn-primary px-8">
@@ -106,8 +106,8 @@ export default async function Home() {
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-500 via-transparent to-transparent"></div>
         </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Ready to Upgrade Your Device?</h2>
-          <p className="text-xl text-zinc-400 mb-10 leading-relaxed max-w-2xl mx-auto">Join 10,000+ happy customers who trust CASESTORE for their device protection.</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight italic uppercase">Join the Collective</h2>
+          <p className="text-xl text-zinc-400 mb-10 leading-relaxed max-w-2xl mx-auto">Experience the intersection of tech and luxury. Join 10,000+ tastemakers who trust VELVET & VUE.</p>
           <Link href="/products" className="bg-white text-black px-10 py-4 rounded-full font-bold transition-all hover:bg-zinc-200 active:scale-95 inline-block">
             Shop the Collection
           </Link>

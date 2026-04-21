@@ -12,8 +12,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="text-xl font-bold tracking-tight hover:opacity-80 transition-opacity">
-            CASE<span className="text-zinc-400">STORE</span>
+          <Link href="/" className="text-xl font-bold tracking-tight hover:opacity-80 transition-opacity uppercase italic">
+            VELVET <span className="text-zinc-400">& VUE</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">

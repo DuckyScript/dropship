@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="text-xl font-bold text-white tracking-tight mb-6 block">
-              CASE<span className="text-zinc-500">STORE</span>
+            <Link href="/" className="text-xl font-bold text-white tracking-tight mb-6 block uppercase italic">
+              VELVET <span className="text-zinc-500">& VUE</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs">
               Premium protection for your most essential devices. Designed with precision, built for the modern lifestyle.
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-zinc-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold uppercase tracking-widest">
-          <p>&copy; {new Date().getFullYear()} CASESTORE. Crafted with care.</p>
+          <p>&copy; {new Date().getFullYear()} VELVET & VUE. Crafted with care.</p>
           <div className="flex gap-6">
             <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="#" className="hover:text-white transition-colors">Terms</Link>
