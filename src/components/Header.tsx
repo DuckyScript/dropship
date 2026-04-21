@@ -19,6 +19,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">Home</Link>
             <Link href="/products" className="text-sm text-gray-600 hover:text-gray-900">Shop</Link>
+            <Link href="/orders" className="text-sm text-gray-600 hover:text-gray-900">Orders</Link>
             <Link href="/cart" className="text-sm text-gray-600 hover:text-gray-900">Cart ({totalItems})</Link>
           </nav>
 
@@ -41,6 +42,7 @@ export default function Header() {
         <nav className="md:hidden border-t border-gray-100 px-4 py-3 flex flex-col gap-2">
           <Link href="/" className="py-2 text-sm text-gray-600">Home</Link>
           <Link href="/products" className="py-2 text-sm text-gray-600">Shop</Link>
+          <Link href="/orders" className="py-2 text-sm text-gray-600">Orders</Link>
           <Link href="/cart" className="py-2 text-sm text-gray-600">Cart ({totalItems})</Link>
         </nav>
       )}
