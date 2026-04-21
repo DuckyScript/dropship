@@ -2,15 +2,32 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a;
-  --muted: #6b7280;
-  --border: #e5e5e5;
-  --accent: #dc2626;
+  --foreground: #0a0a0a;
+  --muted: #666666;
+  --muted-foreground: #a1a1aa;
+  --border: #e2e2e2;
+  --accent: #000000;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --font-sans: var(--font-geist-sans);
 }
 
@@ -18,10 +35,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -30,58 +49,57 @@ body {
   to { opacity: 1; }
 }
 
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.4s ease-out forwards;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animation-delay-100 { animation-delay: 100ms; }
 .animation-delay-200 { animation-delay: 200ms; }
 .animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
 
 .btn-primary {
-  background: #1a1a1a;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
-
-.btn-primary:hover {
-  background: #333;
+  @apply bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium transition-all duration-200 hover:opacity-90 active:scale-95 inline-flex items-center justify-center;
 }
 
 .btn-secondary {
-  background: white;
-  color: #1a1a1a;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  border: 1px solid #e5e5e5;
-  transition: background 0.2s ease;
+  @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-medium transition-all duration-200 hover:bg-zinc-200 active:scale-95 border border-transparent inline-flex items-center justify-center;
 }
 
-.btn-secondary:hover {
-  background: #f5f5f5;
+.btn-outline {
+  @apply bg-transparent text-foreground px-6 py-3 rounded-full font-medium transition-all duration-200 hover:bg-zinc-100 active:scale-95 border border-border inline-flex items-center justify-center;
 }
 
 .card-hover {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
 }
 
-.card-hover:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 .product-card {
-  position: relative;
-  transition: transform 0.2s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-2px);
+  @apply relative overflow-hidden rounded-2xl bg-card border border-border transition-all duration-300;
 }

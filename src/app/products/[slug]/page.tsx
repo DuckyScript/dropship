@@ -31,68 +31,89 @@ export default async function ProductPage({ params }: Props) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <nav className="flex gap-2 text-sm text-gray-500 mb-8">
-        <Link href="/" className="hover:text-gray-900">
-          Home
-        </Link>
-        <span>/</span>
-        <Link href="/products" className="hover:text-gray-900">
-          Products
-        </Link>
-        <span>/</span>
-        <span className="text-gray-900">{product.name}</span>
-      </nav>
+    <div className="bg-white min-h-screen pt-24 pb-16">
+      <div className="section-container">
+        <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400 mb-12 animate-fade-in">
+          <Link href="/" className="hover:text-black transition-colors">Home</Link>
+          <span className="text-zinc-200">/</span>
+          <Link href="/products" className="hover:text-black transition-colors">Products</Link>
+          <span className="text-zinc-200">/</span>
+          <span className="text-zinc-900">{product.name}</span>
+        </nav>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="aspect-square relative bg-gray-100 rounded-lg overflow-hidden">
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        <div>
-          <p className="text-sm text-gray-500 mb-2">{product.category}</p>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-2xl font-bold">${product.price.toFixed(2)}</span>
-            {product.compareAtPrice && (
-              <>
-                <span className="text-lg text-gray-500 line-through">
-                  ${product.compareAtPrice.toFixed(2)}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+          <div className="animate-scale-in">
+            <div className="aspect-[4/5] relative bg-zinc-50 rounded-3xl overflow-hidden group">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority
+              />
+              {product.compareAtPrice && (
+                <span className="absolute top-6 left-6 bg-white text-black text-xs font-bold px-4 py-2 rounded-full shadow-xl uppercase tracking-widest">
+                  Special Offer
                 </span>
-                <span className="bg-red-500 text-white text-sm px-2 py-1 rounded">
-                  {Math.round(
-                    ((product.compareAtPrice - product.price) /
-                      product.compareAtPrice) *
-                      100
-                  )}
-                  % OFF
-                </span>
-              </>
-            )}
+              )}
+            </div>
           </div>
 
-          <p className="text-gray-600 mb-6">{product.description}</p>
+          <div className="flex flex-col justify-center animate-fade-in-up animation-delay-100">
+            <div className="mb-8">
+              <p className="text-xs font-bold text-zinc-400 uppercase tracking-[0.2em] mb-3">{product.category}</p>
+              <h1 className="text-4xl lg:text-5xl font-bold text-zinc-900 tracking-tight leading-tight mb-6">{product.name}</h1>
+              <div className="flex items-center gap-4">
+                <span className="text-3xl font-bold text-zinc-900">${product.price.toFixed(2)}</span>
+                {product.compareAtPrice && (
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl text-zinc-300 line-through">
+                      ${product.compareAtPrice.toFixed(2)}
+                    </span>
+                    <span className="bg-zinc-100 text-zinc-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                      Save {Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)}%
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
 
-          <div className="flex items-center gap-2 mb-6">
-            {product.inStock ? (
-              <>
-                <span className="w-2 h-2 bg-green-500 rounded-full" />
-                <span className="text-green-600">In Stock</span>
-              </>
-            ) : (
-              <>
-                <span className="w-2 h-2 bg-red-500 rounded-full" />
-                <span className="text-red-600">Out of Stock</span>
-              </>
-            )}
+            <div className="space-y-8">
+              <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">Description</h3>
+                <p className="text-zinc-600 leading-relaxed font-medium">{product.description}</p>
+              </div>
+
+              <div className="flex items-center gap-4 py-2">
+                <div className={`px-4 py-2 rounded-full flex items-center gap-2 border ${
+                  product.inStock 
+                  ? "bg-emerald-50 border-emerald-100 text-emerald-700" 
+                  : "bg-rose-50 border-rose-100 text-rose-700"
+                }`}>
+                  <span className={`w-2 h-2 rounded-full animate-pulse ${product.inStock ? "bg-emerald-500" : "bg-rose-500"}`} />
+                  <span className="text-xs font-bold uppercase tracking-widest">{product.inStock ? "Ready to ship" : "Out of Stock"}</span>
+                </div>
+                {product.inStock && (
+                  <span className="text-xs text-zinc-400 font-bold uppercase tracking-widest">Ships worldwide</span>
+                )}
+              </div>
+
+              <div className="pt-4">
+                <AddToCartButton product={product} />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 pt-8 border-t border-zinc-100">
+                <div>
+                  <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Materials</h4>
+                  <p className="text-sm font-bold text-zinc-900">Premium TPU / Vegan Leather</p>
+                </div>
+                <div>
+                  <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Compatibility</h4>
+                  <p className="text-sm font-bold text-zinc-900">iPhone 13 / 14 / 15 Series</p>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <AddToCartButton product={product} />
         </div>
       </div>
     </div>
