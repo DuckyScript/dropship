@@ -41,8 +41,8 @@ export default async function Home() {
               <Link href="/products" className="btn-primary">
                 Shop Now
               </Link>
-              <Link href="/products" className="btn-secondary">
-                View All
+              <Link href="/orders" className="btn-secondary">
+                Track Orders
               </Link>
             </div>
           </div>
