@@ -2,6 +2,7 @@
   "name": "dropship",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && npx prisma db push --skip-generate && next build",
