@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dropship - Premium Products",
-  description: "Fast shipping, quality products, and excellent customer service",
+  title: "VELVET & VUE | Premium Protection Essentials",
+  description: "Experience the intersection of high-fashion and military-grade protection. Discover our curated collection of artisan-crafted essentials.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-gray-50">
+      <body className="min-h-full flex flex-col bg-white">
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>

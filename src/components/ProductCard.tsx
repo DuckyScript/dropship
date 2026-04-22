@@ -38,28 +38,39 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           )}
         </div>
       </Link>
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-1">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{product.category}</p>
+      <div className="p-6">
+        <div className="flex justify-between items-start mb-2">
+          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">{product.category}</p>
+          <div className="flex items-center gap-1">
+             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="currentColor" className="text-zinc-900"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+             <span className="text-[10px] font-bold text-zinc-900 tracking-tighter">4.9</span>
+          </div>
         </div>
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-semibold text-zinc-900 group-hover:text-zinc-600 transition-colors line-clamp-1 text-lg leading-tight mb-2">
+          <h3 className="font-bold text-zinc-900 group-hover:text-zinc-500 transition-colors line-clamp-1 text-lg leading-tight mb-3 tracking-tight">
             {product.name}
           </h3>
         </Link>
-        <div className="flex items-center gap-2 mb-4">
-          <span className="font-bold text-zinc-900">${product.price.toFixed(2)}</span>
-          {product.compareAtPrice && (
-            <span className="text-sm text-zinc-400 line-through">${product.compareAtPrice.toFixed(2)}</span>
-          )}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-zinc-900">${product.price.toFixed(2)}</span>
+            {product.compareAtPrice && (
+              <span className="text-xs text-zinc-400 line-through">${product.compareAtPrice.toFixed(2)}</span>
+            )}
+          </div>
+          <button
+            onClick={() => addToCart(product)}
+            disabled={!product.inStock}
+            className="group/btn relative h-10 w-10 flex items-center justify-center bg-zinc-900 text-white rounded-full transition-all hover:w-32 hover:bg-black active:scale-95 disabled:bg-zinc-100 disabled:text-zinc-400 disabled:cursor-not-allowed overflow-hidden"
+          >
+            <span className="absolute left-1/2 -translate-x-1/2 transition-all group-hover/btn:opacity-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+            <span className="opacity-0 group-hover/btn:opacity-100 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap transition-opacity">
+              Add to Bag
+            </span>
+          </button>
         </div>
-        <button
-          onClick={() => addToCart(product)}
-          disabled={!product.inStock}
-          className="w-full bg-black text-white py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:bg-zinc-100 disabled:text-zinc-400 disabled:cursor-not-allowed"
-        >
-          {product.inStock ? "Add to Cart" : "Out of Stock"}
-        </button>
       </div>
     </div>
   );

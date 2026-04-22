@@ -34,42 +34,46 @@ export default function ProductsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-white pt-24 pb-16">
+    <div className="min-h-screen bg-white pt-32 pb-24">
       <div className="section-container">
-        <div className="max-w-xl mb-16 animate-fade-in">
-          <h1 className="text-5xl font-bold text-zinc-900 tracking-tight mb-4">Our Collection</h1>
-          <p className="text-xl text-zinc-500 leading-relaxed">Browse our selection of premium phone cases. Each one is designed for protection and style.</p>
+        <div className="max-w-3xl mb-20 animate-fade-in">
+          <div className="flex items-center gap-2 mb-6">
+             <span className="w-12 h-px bg-zinc-900"></span>
+             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-900">The Series</span>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold text-zinc-900 tracking-tighter mb-6 leading-none">All Creations</h1>
+          <p className="text-xl text-zinc-500 leading-relaxed font-medium max-w-2xl">Discover our complete range of precision-engineered protection. From crystal clear to artisan leather, find your perfect match.</p>
         </div>
 
         {/* Filters and Search */}
-        <div className="flex flex-col md:flex-row items-stretch gap-6 mb-12 animate-fade-in animation-delay-100">
-          <div className="relative w-full md:flex-1 group">
-            <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 group-focus-within:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-14 pr-6 py-4 bg-zinc-50 border-transparent rounded-2xl focus:bg-white focus:ring-2 focus:ring-black/5 focus:border-black transition-all outline-none text-zinc-900 font-medium h-full"
-            />
-          </div>
-          
-          <div className="flex w-full md:w-auto overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar bg-zinc-50 p-2 rounded-[22px]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-20 animate-fade-in animation-delay-100">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full lg:w-auto pb-4 lg:pb-0">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-8 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all ${
+                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap transition-all border ${
                   selectedCategory === category 
-                  ? "bg-white text-black shadow-sm" 
-                  : "text-zinc-500 hover:text-black"
+                  ? "bg-zinc-900 text-white border-zinc-900 shadow-xl shadow-zinc-200" 
+                  : "bg-white text-zinc-500 border-zinc-100 hover:border-zinc-300"
                 }`}
               >
                 {category}
               </button>
             ))}
+          </div>
+
+          <div className="relative w-full lg:w-96 group">
+            <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 group-focus-within:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-14 pr-8 py-4 bg-zinc-50 border border-zinc-50 rounded-full focus:bg-white focus:ring-4 focus:ring-zinc-100 focus:border-zinc-200 transition-all outline-none text-zinc-900 text-sm font-bold tracking-tight"
+            />
           </div>
         </div>
 
