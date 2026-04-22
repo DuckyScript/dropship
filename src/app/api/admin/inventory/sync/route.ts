@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getApiKeyFromRequest, validateAdminApiKey } from '@/lib/auth';
 
-export async function POST() {
+export async function POST(request: Request) {
+  // Validate API key
+  const apiKey = getApiKeyFromRequest(request);
+  if (!validateAdminApiKey(apiKey)) {
+    return NextResponse.json(
+      { error: 'Unauthorized: Invalid or missing API key' },
+      { status: 401 }
+    );
+  }
+
   try {
     // Get current products with SKUs
     const products = await prisma.product.findMany({
